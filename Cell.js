@@ -1,17 +1,17 @@
-function Cell (pos, radius, pos){
+function Cell (pos, radius, c){
+   
    if(pos) {
-      this.pos = pos;
+      this.pos = pos.copy();
    }else{
       this.pos = createVector(random(width), random(height));
    }
 
-   this.radius = radius || 50;
-   this.color = color (random(100,255), 0 , random(100,255)) || color;
+   this.radius = radius || 60;
+   this.color = c || color(random(100,255), 0 , random(100,255), 100);
 
    //Take that random change and add it to position
    this.move = function(){
-      var change = p5.Vector.random2D();
-      this.pos.add(change);
+      this.pos.add(p5.Vector.random2D());
    } 
 
    this.show = function (){
@@ -29,9 +29,9 @@ function Cell (pos, radius, pos){
       }
    }
 
-   this.mitosis = function (){
-      this.pos.x += random(-this.radius,this.radius);
-      var cell = new Cell(this.pos, this.radius, this.color);
-      return cell;
+   //Main mitosis function that randomizes the next position and divides the radius
+   this.mitosis = function (cell){
+      // pos += random(-this.radius,this.radius);
+      return new Cell(cell.pos, this.radius*0.9, this.color);
    }
 }

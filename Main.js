@@ -1,8 +1,7 @@
 var cells = [];
 
 function setup(){
-   createCanvas(1000,1000);
-   cells.push(new Cell());
+   createCanvas(700,700);
    cells.push(new Cell());
 }
 
@@ -19,8 +18,9 @@ function draw (){
 function mousePressed(){
    for (let i = cells.length-1; i>=0 ; i--) {
       if(cells[i].clicked(mouseX, mouseY)){
-         cells.push(cells[i].mitosis());
+         cells.push(cells[i].mitosis(cells[i]));
+         cells.push(cells[i].mitosis(cells[i]));
          cells.splice(i,1);
       }
    }
-}
+} 
